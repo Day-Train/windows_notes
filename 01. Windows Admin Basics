@@ -1,0 +1,12 @@
+#Help in Powershell
+$ get-help [[-Name] <String[]>]         #Summon PowerShell help Cmdlet
+$ help                                  #Alias to help
+$ man                                   #Alias to help
+$ get-help -Detailed                    #Summon detailed help 
+$ get-help -Examples                    #Open help with examples
+$ get-help -ShowWindow                  #Open help in new window
+$ get-help -Online                      #Open help in web browser
+
+#Convenience commands
+$ cls                                   #Clear screen like POSIX $clear
+
