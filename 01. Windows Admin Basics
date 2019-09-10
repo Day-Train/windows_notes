@@ -1,12 +1,52 @@
+#Navigation
+$ cd                                    #Change directory
+$ dir                                   #Display contents of directory (alias get-ChildItem) much like ls
+$ $x = <something>                      #Assign value to variable 'x'
+
+#System administration
+$ ipconfig                              #Display ip configuration of host
+
 #Help in Powershell
-$ get-help [[-Name] <String[]>]         #Summon PowerShell help Cmdlet
+$ get-help [[-Name] <String[]>]         #Summon PowerShell help for a particular Cmdlet
 $ help                                  #Alias to help
 $ man                                   #Alias to help
 $ get-help -Detailed                    #Summon detailed help 
 $ get-help -Examples                    #Open help with examples
 $ get-help -ShowWindow                  #Open help in new window
 $ get-help -Online                      #Open help in web browser
+$ help ABOUT_*                          #Describes how to create/use/etc. a particular conceptual topic (e.g. hash tables, pipes)
+
+#Pipelines
+$ get-service -name bits | stop-service                 #Get the 'bits' service and pipe it to the stop-service command (same as $ Stop-service -name bits)
+$ get-service | out-file -FilePath c:\test.txt          #Export content to plaintext file
+$ get-content c:\test.txt                               #Retrieve content from text file
+$ get-service | ConvertTo-csv                           #Pipe output converted to csv format
+$ get-service | export-csv -Path c:\service.csv         #Pipe output converted to csv format AND export to a file
+$ import-csv c:\service.csv                             #Import csv file
+$ get-service | ConvertTo-html -Property name,status | out-file c:\test.htm     #Pipe output converted to html format with specified fields and export to specified file
+$ get-process | Export-clixml -Path C:\good.xml         #Get list of running processes and export it to specified file
+$ compare-object -ReferenceObject (import-clixml c:\good.xml) -DifferenceObject (get-process) -Property name                #perform a comparison between the exported system state and the current running process and using their names as comparison criteria and print it to console. Note that the parentheses () establish order of operation
+
+#Working with PowerShell objects
+$ get-process | where handles -gt 900                   #Get processes where property 'handles' is greater than 900
+$ get-process | where handles -gt 900 | sort handles    #As above AND sort by property 'handles'
+$ <Object> | gm                                         #Generate an object (e.g. from get-process) and return its members -> i.e. show its properties, methods, etc.. Alias of $ get-member
+$ get-service | <Select || Select-object> -Property name, status    #Generate objects and display their selected properties name and status
+$ get-childitem | select - Property name, length | sort -Property length -Descending        #Note get-childitem is *basically* dir/ls
+$ Get-EventLog -LogName System -Newest 5 | select -Property EventID, TimeWritten, Message | sort -Property TimeWritten | ConvertTo-html | out-file c:\error.htm
+
+
+#Modules - packages that extend PowerShell core functionality with application specific features and Cmdlets
+$ mmc                                   #Bring up module management console
+$ get-module                            #Show curently loaded modules
+$ get-module -ListAvailable             #List available modules, loaded or not
 
 #Convenience commands
-$ cls                                   #Clear screen like POSIX $clear
-
+$ cat                                   #Display contents of file
+$ cls                                   #Clear screen like POSIX $ clear
+$ get-history                           #Display history of commands like $ history in POSIX
+$ [<Type>](<Object>)                    #Cast object to type XML
+    Ex. $x = [xml](cat .\myfile.xml)    #Take contents of file myfile.xml, cast it as type xml and assign it to variable 'x'
+$ notepad c:\service.csv                #Open specified file in notepad
+$ <Command> -whatif                     #Tells you what command would do without actually doing it
+$ <Command> -confirm                    #-whatif AND asks you to confirm you want to proceed
