@@ -1,7 +1,18 @@
 #Navigation
 $ cd                                    #Change directory
 $ dir                                   #Display contents of directory (alias get-ChildItem) much like ls
+
+#Syntax
+$ Command -Parameter <Parameter Argument> [-OptionalParameter1] [-OptionalParameter2 <OptionalParameter2 Argument>]
+$ Command <String[]>                    #Enter command with a command with arguments passed as a comma-separated list
+
+
+#Working with files, variables, and PowerShell objects
 $ $x = <something>                      #Assign value to variable 'x'
+$ <command> | <command>                 #Execute command and pipe output to another command
+$ <command> > file.txt                  #Execute command and write (overwriting!) output to specified file
+$ <command> >> file.txt                 #Execute command and append output to specified file
+$ <second-command> (<first-command>)    #Execute commands with precedence
 
 #System administration
 $ ipconfig                              #Display ip configuration of host
@@ -35,7 +46,6 @@ $ get-service | <Select || Select-object> -Property name, status    #Generate ob
 $ get-childitem | select - Property name, length | sort -Property length -Descending        #Note get-childitem is *basically* dir/ls
 $ Get-EventLog -LogName System -Newest 5 | select -Property EventID, TimeWritten, Message | sort -Property TimeWritten | ConvertTo-html | out-file c:\error.htm
 
-
 #Modules - packages that extend PowerShell core functionality with application specific features and Cmdlets
 $ mmc                                   #Bring up module management console
 $ get-module                            #Show curently loaded modules
@@ -50,3 +60,6 @@ $ [<Type>](<Object>)                    #Cast object to type XML
 $ notepad c:\service.csv                #Open specified file in notepad
 $ <Command> -whatif                     #Tells you what command would do without actually doing it
 $ <Command> -confirm                    #-whatif AND asks you to confirm you want to proceed
+
+#Common Parameters
+#Can be used with any commane. Include common flags like -verbose, -debug, etc. safety commands like -whatif and -confirm
