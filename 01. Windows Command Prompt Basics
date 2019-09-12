@@ -51,4 +51,5 @@ $ color <##>                                    #Change color scheme of CLI to v
 
 #System administration
 $ shutdown					#Shutdown host
+$ tasklist          				#Display running processes
 $ ipconfig					#Display ip configuration
