@@ -1,1 +1,48 @@
+#Help
+$ <command> /?                               #View help for <command>
+
 #Navigation
+$ cd [path]                                     #Change directory to location specified by [path], return to home directory if no arguments used. Note Windows will accept both forward and back slashes for relative paths.
+$ cd ..                                         #Go to parent directory
+$ dir                                           #View contents of current working directory
+$ dir [path]                                    #View contents of directory specified by [path]
+$ dir [filename]                                #Displays particular file or files by name, accepts filter expressions
+$ dir /a [path]                                 #Pass /a flag to view hidden files
+$ cls                                           #Clear screen
+$ path                                          #Display search path for executable files
+$ tree                                          #View tree-like structure of directory and subdirectories
+$ echo <string>                                 #Echo string to screen
+
+#Working with files and directories
+$ <filename>                                    #Open file in the default application
+$ copy <filename1> <filename2>                  #Copy file
+$ copy nul <filename>                           #Create empty file, similar to 'touch' in *nix
+$ xcopy <filename1> <filename2>                 #Better version of copy, preferred over copy
+$ xcopy <directory1> <directory2> /s            #Copy contents of directory1 including folders to directory2
+$ move <filename1> <filename2>                  #Move file, rename file if no location specified, will overwrite files
+$ rename <filename1> <filename2>                #Rename file or directory, cannot overwrite files
+$ del <filename>                                #Delete file
+$ attrib [options] [filename] [flags]           #Display or change file attributes
+$ mkdir <directory>                             #Create directory with specified name
+$ rmdir <directory>                             #Remove directory with specified name
+$ rmdir /s <directory>                          #Remove directory and all of its contents
+
+#Pipes and redirection
+$ <command> > <filename>                        #Redirect output to file, overwriting if present, creating if not
+$ <command> >> <filename>                       #Redirect output to file, appending to file
+$ type <filename>                               #Read contents of file to display, similar to 'cat' in *nix
+
+#Drives and filesystem
+$ wmic                                          #Utility for Windows Management Instrumentation command-line
+$ wmic logicaldisk [parameters]                 #Utility for local storage device management
+$ <Drive name>                                  #Switch drives ex: C:\> E: switch to 'E' drive
+
+#Users
+#Profiles in C:\Users
+
+#Convenience commands
+$ <partial command/expression>[Tab]             #Autocompletion
+$ [Home]                                        #Move cursor to beginning of command
+$ [End]                                         #Move cursor to end of command
+$ [Ctrl + Left Arrow/Right Arrow]               #Move cursor left or right one word
+$ color <##>                                    #Change color scheme of CLI to values specified by ##
