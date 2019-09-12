@@ -1,5 +1,5 @@
 #Help
-$ <command> /?                               #View help for <command>
+$ <command> /?                                  #View help for <command>
 
 #Navigation
 $ cd [path]                                     #Change directory to location specified by [path], return to home directory if no arguments used. Note Windows will accept both forward and back slashes for relative paths.
