@@ -39,6 +39,8 @@ $ <Drive name>                                  #Switch drives ex: C:\> E: switc
 
 #Users
 #Profiles in C:\Users
+$ net user					#Display user accounts on host
+$ net user <username> [options]			#Administer settings for user: <username>
 
 #Convenience commands
 $ <partial command/expression>[Tab]             #Autocompletion
@@ -46,3 +48,7 @@ $ [Home]                                        #Move cursor to beginning of com
 $ [End]                                         #Move cursor to end of command
 $ [Ctrl + Left Arrow/Right Arrow]               #Move cursor left or right one word
 $ color <##>                                    #Change color scheme of CLI to values specified by ##
+
+#System administration
+$ shutdown					#Shutdown host
+$ ipconfig					#Display ip configuration
