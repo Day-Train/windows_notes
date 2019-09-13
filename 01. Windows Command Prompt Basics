@@ -1,5 +1,6 @@
 #Help
 $ <command> /?                                  #View help for <command>
+$ help						#Display command help
 
 #Navigation
 $ cd [path]                                     #Change directory to location specified by [path], return to home directory if no arguments used. Note Windows will accept both forward and back slashes for relative paths.
@@ -37,11 +38,15 @@ $ type <filename>                               #Read contents of file to displa
 $ wmic                                          #Utility for Windows Management Instrumentation command-line
 $ wmic logicaldisk [parameters]                 #Utility for local storage device management
 $ <Drive name>                                  #Switch drives ex: C:\> E: switch to 'E' drive
+$ net share [OPTIONS]				#Share resources/directories/drives
 
-#Users
+#Users and groups
 #Profiles in C:\Users
 $ net user					#Display user accounts on host
 $ net user <username> [options]			#Administer settings for user: <username>
+$ net localgroup				#Display groups on local machine
+$ net group /domain				#Display groups on domain
+$ net localgroup users				#Display users in localgroup
 
 #Convenience commands
 $ <partial command/expression>[Tab]             #Autocompletion
@@ -49,7 +54,7 @@ $ [Home]                                        #Move cursor to beginning of com
 $ [End]                                         #Move cursor to end of command
 $ [Ctrl + Left Arrow/Right Arrow]               #Move cursor left or right one word
 $ color <##>                                    #Change color scheme of CLI to values specified by ##
-$ findstr					#grep for windows
+$ findstr <pattern>				#grep for windows
 $ date /t					#Output system date, /t flag non-interactive
 $ time /t					#Output system time, /t flag non-interactive
 
@@ -58,7 +63,20 @@ $ hostname					#System hostname
 $ shutdown					#Shutdown host
 $ tasklist          				#Display running processes
 $ ipconfig					#Display ip configuration
+$ net start					#Display services that are started
+$ sc						#Program for communicating with services
+$ sc query <service>				#Query information on service, or all services if no argument used
 
 #Common environment variables
 $ %CD%						#Current directory
-% %USERNAME%					#Current user
+$ %USERNAME%					#Current user
+$ %COMPUTERNAME%				#Name of computer
+
+#Windows Management Instrumentation Console (WMIC)
+$ wmic process					#Process management
+$ wmic process list brief			#List running processes
+$ wmic process get /all /format:list		#List running processes, get all information, and format as list
+$ wmic service get /all /format:table		#List running services, get all informaiton, and format as table
+$ wmic useraccount list brief			#List wmic users
+$ wmic nicconfig list brief			#Display network adapters
+$ wmic nteventlog				#Display event logs
