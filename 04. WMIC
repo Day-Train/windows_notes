@@ -1,8 +1,20 @@
 #Windows Management Instrumentation Console (WMIC)
+#Usage
+$ wmic <alias> [switches] [options]		#Generic format
+$ wmic alias [list] [brief]			#Display list of available wmic aliases
+#Or
+$ wmic						#Enter wmic shell
+
+#Common aliases
 $ wmic process					#Process management
-$ wmic process list brief			#List running processes
+$ wmic useraccount				#User information
+$ wmic group					#Group information
+$ wmic nicconfig				#Display network adapters
+$ wmic nteventlog				#Display event logs
+
+#Common switches and options
+$ wmic process list brief			#List running processes in brief, list form
 $ wmic process get /all /format:list		#List running processes, get all information, and format as list
 $ wmic service get /all /format:table		#List running services, get all informaiton, and format as table
-$ wmic useraccount list brief			#List wmic users
-$ wmic nicconfig list brief			#Display network adapters
-$ wmic nteventlog				#Display event logs
+$ wmic useraccount list brief			#List wmic users in brief, list form
+$ wmic useraccount get Name, SID		#Return Name and SID only from users
