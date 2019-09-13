@@ -1,0 +1,8 @@
+#Windows Management Instrumentation Console (WMIC)
+$ wmic process					#Process management
+$ wmic process list brief			#List running processes
+$ wmic process get /all /format:list		#List running processes, get all information, and format as list
+$ wmic service get /all /format:table		#List running services, get all informaiton, and format as table
+$ wmic useraccount list brief			#List wmic users
+$ wmic nicconfig list brief			#Display network adapters
+$ wmic nteventlog				#Display event logs
