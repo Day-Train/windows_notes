@@ -64,6 +64,10 @@ $ for /f [OPTIONS] %%variable in (file-set) do <command>	#Run with options
 @echo off
 for /f "tokens=2,3 delims=," %%i in (input_read_file2.txt) do @echo %%i %%j		#Treats file contents as a set, each of which is delimited by a comma (',') and echos the 2nd and 3rd word from each element
 
+#Conditionals
+$ <command1> [& | ;] <command2>			#Execute second command regardless of success/failure of first
+$ <command1> && <command2>			#Execute second command only if the first is successful
+$ <command1> || <command2>			#Execute second command only if the first fails
 
 #Writing to text files
 $ <command/output> > <filename>				#Overwrite to file
