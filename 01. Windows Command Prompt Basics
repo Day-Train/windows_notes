@@ -64,6 +64,8 @@ $ shutdown					#Shutdown host
 $ tasklist          				#Display running processes
 $ ipconfig					#Display ip configuration
 $ net start					#Display services that are started
+$ netstat					#Display TCP/IP connections
+$ systeminfo					#Display system information and configuration
 $ sc						#Program for communicating with services
 $ sc query <service>				#Query information on service, or all services if no argument used
 
