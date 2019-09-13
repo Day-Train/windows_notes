@@ -1,7 +1,7 @@
 #Windows Management Instrumentation Console (WMIC)
 #Usage
 $ wmic <alias> [switches] [options]		#Generic format
-$ wmic alias [list] [brief]			#Display list of available wmic aliases
+$ wmic alias list [brief]			#Display list of available wmic aliases
 #Or
 $ wmic						#Enter wmic shell
 
