@@ -1,0 +1,92 @@
+#BAT files saved with .bat extension
+$ pause							#Suspsends execution of batch program and waits for user
+$ goto <location>					#Skips execution and continues execution at :location in bat script
+$ set [variable=[string]]				#Display, set, remove variables
+$ set NUMBER=33						#Set variable NUMBER to 33 in script
+$ set /p NUMBER=Enter a number:				#Prompt user for input and set variable NUMBER to input
+$ echo %NUMBER%						#Call the variable NUMBER
+$ @echo off 						#Do not display command currently running, convenience command
+$ start [command/program]				#Start a new window to run a specified program (e.g. start notepad.exe)
+
+#Example Script 1: Prompt user for input
+@echo off						#Do not print command currently running
+set /p NUMBER=Enter a number:				#Prompt the user for input and assign the value to the variable NUMBER
+echo You entered: %NUMBER%				#Print the value of variable NUMBER to screen
+
+#Example Script 2: Prompt user for input and evaluate expression
+@echo off						#Do not print command currently running
+:start							#Label used as a reference for goto commands
+set /p MATH=Enter a mathematical expression (e.g. 2 + 2):	#Prompt the user for input and assign the value to the variable NUMBER
+set /a RESULT=%MATH%					#Parse the value to the right as a mathematical expression to be evaluated and assign it to RESULT
+echo %RESULT%						#Print the value of RESULT to screen
+pause							#Pause execution
+if %RESULT%==5 echo The result equals 5			#If RESULT equals 5 let the user know
+cls							#Clear the screen
+goto start						#Start execution again from :start
+
+#Control flow
+$ if [NOT] string1==string2 <command>			#If evaluates to true, execute command - Note option NOT: execute if false
+$ if [NOT] EXIST <filename> <command>			#If filename exists, execute command
+$ if [NOT] string1==string2 (				#Syntax to nest command or commands
+<command>
+[<command>]
+[<command>]
+)
+
+if EXIST file.txt (					#if-else control flow
+echo FOUND
+) else (
+echo NOT FOUND
+)
+
+if <comparison> (					#else if control flow
+#do something
+) else if <comparison> (
+#do something 
+) else (
+#do something
+)
+
+$ if string1 EQU string2 <command>		#Evaluate true if equal
+$ if string1 NEQ string2 <command>		#Evaluate true if not equal
+$ if string1 LSS string2 <command>		#Evaluate true if less than <
+$ if string1 LEQ string2 <command>		#Evaluate true if less than or equal <=
+$ if string1 GTR string2 <command>		#Evaluate true if greater than >
+$ if string1 GEQ string2 <command>		#Evaluate true if greater than or equal >=
+
+$ for %variable in (set) do <command>		#For loop, runs a specified command for each file in a set of files
+						#(set)	specifies a set of one or more files
+						#%variable is a single character and (e.g. %%a, %%b, etc.) MUST be %%variable in batch files
+$ for /f [OPTIONS] %%variable in (file-set) do <command>	#Run with options
+						#Options include:
+						#delims=xxx where default delimiters are space and tab
+						#tokens=x,y,m-n specifies tokens by number (e.g. xth word or m thru nth word)
+@echo off
+for /f "tokens=2,3 delims=," %%i in (input_read_file2.txt) do @echo %%i %%j		#Treats file contents as a set, each of which is delimited by a comma (',') and echos the 2nd and 3rd word from each element
+
+
+#Writing to text files
+$ <command/output> > <filename>				#Overwrite to file
+$ <command/output> >> <filename>			#Append to file
+#Read lines from a file:
+$ for /f "Delims=" %%a in (%FILENAME%) do (
+	echo %%a 					#do something, in this case echo the line 
+)
+
+#Example Script 3: Copy program to user's desktop and start program
+@echo off						#Do not print command currently running
+set FILE=program.exe
+xcopy /y %CD%\%FILE% C:\Users\%USERNAME%\Desktop	#Copy file.txt to Desktop, /y suppress prompt to ask if user is sure
+start C:\Users\%USERNAME%\Desktop\%FILE%		#Execute program
+
+#Example Script 4: Pass variables between files
+#send.bat
+@echo off
+call receive.bat hi bye					#Call another file and pass it two values
+
+#receive.bat
+@echo off 
+set FILENAME=%0						#Set variable FILENAME to zeroth element sent (always the filename) 
+set WORD1=%1						#Set variable to first value received
+set WORD2=%2						#Set variable to second value received
+echo %FILENAME% says %WORD1% and %WORD2% 		#Do something with variables
