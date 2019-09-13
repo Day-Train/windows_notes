@@ -53,3 +53,7 @@ $ color <##>                                    #Change color scheme of CLI to v
 $ shutdown					#Shutdown host
 $ tasklist          				#Display running processes
 $ ipconfig					#Display ip configuration
+
+#Common environment variables
+$ %CD%						#Current directory
+% %USERNAME%					#Current user
