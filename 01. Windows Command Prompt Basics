@@ -28,6 +28,7 @@ $ rmdir <directory>                             #Remove directory with specified
 $ rmdir /s <directory>                          #Remove directory and all of its contents
 
 #Pipes and redirection
+$ echo <string>					#Output string, default to screen
 $ <command> > <filename>                        #Redirect output to file, overwriting if present, creating if not
 $ <command> >> <filename>                       #Redirect output to file, appending to file
 $ type <filename>                               #Read contents of file to display, similar to 'cat' in *nix
@@ -48,8 +49,12 @@ $ [Home]                                        #Move cursor to beginning of com
 $ [End]                                         #Move cursor to end of command
 $ [Ctrl + Left Arrow/Right Arrow]               #Move cursor left or right one word
 $ color <##>                                    #Change color scheme of CLI to values specified by ##
+$ findstr					#grep for windows
+$ date /t					#Output system date, /t flag non-interactive
+$ time /t					#Output system time, /t flag non-interactive
 
 #System administration
+$ hostname					#System hostname 
 $ shutdown					#Shutdown host
 $ tasklist          				#Display running processes
 $ ipconfig					#Display ip configuration
