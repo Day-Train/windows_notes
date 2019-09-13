@@ -11,6 +11,8 @@ $ wmic useraccount				#User information
 $ wmic group					#Group information
 $ wmic nicconfig				#Display network adapters
 $ wmic nteventlog				#Display event logs
+$ wmic computersystem				#Computer system management and configuration
+$ wmic ntdomain					#NT domain management
 
 #Common switches and options
 $ wmic process list brief			#List running processes in brief, list form
