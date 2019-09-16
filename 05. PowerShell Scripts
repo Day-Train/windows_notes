@@ -33,3 +33,7 @@ $x=0; while ($x -lt 10) {
 $ (get-process)[4]					#Return the 5th element in array
 $ (get-process)[0..4]					#Return first 5 elements in an array
 $ get-process | select -First 5				#Return first 5 elements in an array
+
+#Counting
+$ Get-Process | Measure-Object
+$ (Get-Process).count
