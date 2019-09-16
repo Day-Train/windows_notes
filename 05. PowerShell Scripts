@@ -1,0 +1,3 @@
+#PowerShell script extension .ps1
+$ get-executionpolicy					#Get system execution policy
+$ set-executionpolicy <policy> [-Force]			#Set execution policy, policy in Restricted, Unrestricted, etc.
