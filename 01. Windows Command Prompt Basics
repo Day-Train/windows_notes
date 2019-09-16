@@ -68,6 +68,7 @@ $ netstat					#Display TCP/IP connections
 $ systeminfo					#Display system information and configuration
 $ sc						#Program for communicating with services
 $ sc query <service>				#Query information on service, or all services if no argument used
+$ net use					#Map and manage drive, show detailed information on drives and devices, similar to mount in *nix
 
 #Common environment variables
 $ %CD%						#Current directory
