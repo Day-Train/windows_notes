@@ -6,7 +6,6 @@ $ dir                                   #Display contents of directory (alias ge
 $ Command -Parameter <Parameter Argument> [-OptionalParameter1] [-OptionalParameter2 <OptionalParameter2 Argument>]
 $ Command <String[]>                    #Enter command with a command with arguments passed as a comma-separated list
 
-
 #Working with files, variables, and PowerShell objects
 $ $x = <something>                      #Assign value to variable 'x'
 $ <command> | <command>                 #Execute command and pipe output to another command
@@ -26,9 +25,17 @@ $ get-help -Examples                    #Open help with examples
 $ get-help -ShowWindow                  #Open help in new window
 $ get-help -Online                      #Open help in web browser
 $ help ABOUT_*                          #Describes how to create/use/etc. a particular conceptual topic (e.g. hash tables, pipes)
+$ get-command				#Get list of commands
+$ get-verb				#Get list of verbs
+$ <Powershell Object> | get-member	#Get properties and methods of a Powershell object
+$ get-alias				#Get list of aliases (e.g. man -> help)
+
+#Working with files
+$ new-item -Name <filename> -Type <type>	#Create file of type, type in File, Directory, Sym-Link, etc.
+$ remove-item <filename>			#Remove a file
 
 #Pipelines
-$ get-service -name bits | stop-service                 #Get the 'bits' service and pipe it to the stop-service command (same as $ Stop-service -name bits)
+$ get-service -name bits | stop-service                 #Get the 'bits' service and pipe it to the stop-service command (same as $ stop-service -name bits)
 $ get-service | out-file -FilePath c:\test.txt          #Export content to plaintext file
 $ get-content c:\test.txt                               #Retrieve content from text file
 $ get-service | ConvertTo-csv                           #Pipe output converted to csv format
@@ -45,6 +52,25 @@ $ <Object> | gm                                         #Generate an object (e.g
 $ get-service | <Select || Select-object> -Property name, status    #Generate objects and display their selected properties name and status
 $ get-childitem | select - Property name, length | sort -Property length -Descending        #Note get-childitem is *basically* dir/ls
 $ Get-EventLog -LogName System -Newest 5 | select -Property EventID, TimeWritten, Message | sort -Property TimeWritten | ConvertTo-html | out-file c:\error.htm
+#Get a process, select columns, sort by property, apply filter criteria
+$ get-process | select-object name,id,path | Sort-Object -Property id | Where-Object id -le "1000"
+
+$ get-cimclass						#Get list of common information models (classes of PowerShell objects)
+$ get-wmiobject						#Windows Management Instrumentation class, Windows implementation of CIM class. Similar to the above
+$ get-cimclass *BIOS*					#Get list of classes related to BIOS
+$ get-ciminstance win32_BIOS				#Get information on your BIOS
+
+#Working with processes
+$ start-process chrome					#Start chrome
+$ (get-process chrome).kill()				#Kill chrome
+
+#Working with user-defined functions
+#Declare a function
+$ function function-name { <functino> }
+$ function get-enumeration { get-date; get-process; get-service}
+#Call a function
+$ function-name
+$ get-enumeration
 
 #Modules - packages that extend PowerShell core functionality with application specific features and Cmdlets
 $ mmc                                   #Bring up module management console
@@ -62,4 +88,6 @@ $ <Command> -whatif                     #Tells you what command would do without
 $ <Command> -confirm                    #-whatif AND asks you to confirm you want to proceed
 
 #Common Parameters
-#Can be used with any commane. Include common flags like -verbose, -debug, etc. safety commands like -whatif and -confirm
+#Can be used with any command. Include common flags like -verbose, -debug, etc. safety commands like -whatif and -confirm
+$ <command> -ErrorAction silentlycontinue	#Don't throw out errors
+$ <command> -Verbose				#Tell me everything
