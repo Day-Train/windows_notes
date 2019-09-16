@@ -86,6 +86,7 @@ $ [<Type>](<Object>)                    #Cast object to type XML
 $ notepad c:\service.csv                #Open specified file in notepad
 $ <Command> -whatif                     #Tells you what command would do without actually doing it
 $ <Command> -confirm                    #-whatif AND asks you to confirm you want to proceed
+$ $PSVersionTable                       #Get PowerShell version information
 
 #Common Parameters
 #Can be used with any command. Include common flags like -verbose, -debug, etc. safety commands like -whatif and -confirm
