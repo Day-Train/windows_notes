@@ -20,3 +20,8 @@ $ wmic process get /all /format:list		#List running processes, get all informati
 $ wmic service get /all /format:table		#List running services, get all informaiton, and format as table
 $ wmic useraccount list brief			#List wmic users in brief, list form
 $ wmic useraccount get Name, SID		#Return Name and SID only from users
+
+#WMIC supports a structured query language
+$ wmic <wmic object> where <column=value> get <columns> [optional parameters]
+#Example
+$ wmic process where name="services.exe" get ProcessId,ThreadCount
