@@ -1,3 +1,35 @@
 #PowerShell script extension .ps1
 $ get-executionpolicy					#Get system execution policy
 $ set-executionpolicy <policy> [-Force]			#Set execution policy, policy in Restricted, Unrestricted, etc.
+
+#Variables
+$ $a = 'hello world'					#Set the value of a
+$ echo $a						#Print variable to screen
+$ $a							#Print variable to screen (alternative)
+$ $a = "hello world"
+$ Write-Output "The value of a is $a"			#Print with variable substitution
+> "The value of a is hello world"
+$ Write-Output 'The value of a is $a'			#Print as string literal
+> 'The value of a is $a'
+
+#Looping
+#ForEach Loop
+$ (get-process).name | foreach { Write-Output "$_ is a running process" }		#Get the name of every running process, pipe it to a for loop and foreach line write-output
+foreach ($line in Get-Process) { Write-Output "$($line.Name) is a running process" }	#Same as above
+
+#For Loop
+for ($a=1; $a -le 6; $a++) {
+    Write-Output "The number is $a"; 
+    Start-Sleep 1
+}
+
+#While Loop
+$x=0; while ($x -lt 10) {
+    Write-Output "this is loop number $x";
+    $x++
+}
+
+#Indices
+$ (get-process)[4]					#Return the 5th element in array
+$ (get-process)[0..4]					#Return first 5 elements in an array
+$ get-process | select -First 5				#Return first 5 elements in an array
