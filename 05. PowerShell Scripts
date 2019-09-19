@@ -29,6 +29,14 @@ $x=0; while ($x -lt 10) {
     $x++
 }
 
+#Arrays
+$ $myarray = @()					#Create an array
+$ $myarray += "Hello"					#Add element to array
+$ $myarray += "World"					#Add element to array
+$ $myarray | get-random					#Retrieve random element from array
+$ $myarray = 1..4					#Create array with elements [1,2,3,4]
+$ $myarray[0]						#Access element at index 0
+
 #Indices
 $ (get-process)[4]					#Return the 5th element in array
 $ (get-process)[0..4]					#Return first 5 elements in an array
