@@ -1,0 +1,40 @@
+#Windows SysInternals Utilities
+#psloggedon
+#TODO
+
+#logonsession
+#TODO
+
+#procexp
+#TODO
+
+#autoruns
+#TODO
+
+#pslist64
+#TODO
+
+#psinfo
+#TODO
+
+#procmon
+#TODO
+
+#handles
+#TODO
+
+#tcpview
+#TODO
+
+#Windows boot process
+
+#Process Validity
+$ tasklist | findstr /i svchost						#Display running services
+$ tasklist /v								#Display running tasks including username
+$ netstat -ano								#Display network connections
+$ netstat -anob								#Display network connections including name of running process
+$ Get-Process SMSS,CSRSS,LSASS | sort -Property id			#Display running boot processes
+$ Get-Process | select name, id, description | sort -Property id	#Look for high PID processes	
+$ tasklist /m								#Specific dlls used by running processes
+$ Get-Process skype4life | foreach {$a} {$_.modules} | more		#Display dlls used by a specific process, start validation with non System32 dlls
+$ Get-ScheduledTask							#Display scheduled tasks
