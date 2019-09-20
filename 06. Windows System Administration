@@ -38,3 +38,38 @@ $ Get-Process | select name, id, description | sort -Property id	#Look for high 
 $ tasklist /m								#Specific dlls used by running processes
 $ Get-Process skype4life | foreach {$a} {$_.modules} | more		#Display dlls used by a specific process, start validation with non System32 dlls
 $ Get-ScheduledTask							#Display scheduled tasks
+
+#Alternate data streams
+#Standard data stream formatted as follows
+[filename.extension]:[alternate_stream_name]::$DATA
+
+#Create file
+echo hello > reminder.txt
+#Add ADS
+echo social security numbers > reminder.txt:secret.info
+
+#View ADS Content or if files have ADS attached
+more < reminder.txt:secret.info
+notepad reminder.txt:secret.info
+dir /r reminder.txt
+
+#View hash of a file
+certutil -hashfile test.txt MD5
+
+#Execute vb scripts
+wscript .\test.txt:secret.vbs
+
+#View ADS content
+get-content reminder.txt -stream secret.info
+
+#Create visual basic script within a ADS
+Add-Content -Path .\test.txt -Value 'Dim oShell' -Stream 'secret.vbs'
+Add-Content -Path .\test.txt -Value 'Set oShell = Wscript.CreateObject ("Wscript.Shell")' -Stream 'secret.vbs'
+Add-Content -Path .\test.txt -Value 'oShell.run "cmd /k CD C:\Program Files & ping 8.8.8.8" ,1 , true ' -Stream 'secret.vbs'
+
+#Viewing ADS from powershell
+gi * -stream *
+gci | % { gi $_.FullName -stream * } | where stream -ne ':$Data'
+gci -force
+gi * -force -stream * 
+
