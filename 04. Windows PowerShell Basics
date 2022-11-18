@@ -34,6 +34,33 @@ $ get-alias				#Get list of aliases (e.g. man -> help)
 $ new-item -Name <filename> -Type <type>	#Create file of type, type in File, Directory, Sym-Link, etc.
 $ remove-item <filename>			#Remove a file
 
+#Equality
+-eq, -ieq, -ceq - equals
+-ne, -ine, -cne - not equals
+-gt, -igt, -cgt - greater than
+-ge, -ige, -cge - greater than or equal
+-lt, -ilt, -clt - less than
+-le, -ile, -cle - less than or equal
+
+# Matching
+-like, -ilike, -clike - string matches wildcard pattern
+-notlike, -inotlike, -cnotlike - string does not match wildcard pattern
+-match, -imatch, -cmatch - string matches regex pattern
+-notmatch, -inotmatch, -cnotmatch - string does not match regex pattern
+
+#Replacement
+-replace, -ireplace, -creplace - replaces strings matching a regex pattern
+
+# Containment
+-contains, -icontains, -ccontains - collection contains a value
+-notcontains, -inotcontains, -cnotcontains - collection does not contain a value
+-in - value is in a collection
+-notin - value is not in a collection
+
+# Type
+-is - both objects are the same type
+-isnot - the objects are not the same type
+
 #Pipelines
 $ get-service -name bits | stop-service                 #Get the 'bits' service and pipe it to the stop-service command (same as $ stop-service -name bits)
 $ get-service | out-file -FilePath c:\test.txt          #Export content to plaintext file

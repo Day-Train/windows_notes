@@ -1,0 +1,152 @@
+#Navigation
+$ cd                                    #Change directory
+$ dir                                   #Display contents of directory (alias get-ChildItem) much like ls
+
+#Syntax
+$ Command -Parameter <Parameter Argument> [-OptionalParameter1] [-OptionalParameter2 <OptionalParameter2 Argument>]
+$ Command <String[]>                    #Enter command with a command with arguments passed as a comma-separated list
+
+#Working with files, variables, and PowerShell objects
+$ $x = <something>                      #Assign value to variable 'x'
+$ <command> | <command>                 #Execute command and pipe output to another command
+$ <command> > file.txt                  #Execute command and write (overwriting!) output to specified file
+$ <command> >> file.txt                 #Execute command and append output to specified file
+$ <second-command> (<first-command>)    #Execute commands with precedence
+
+#System administration
+$ ipconfig                              #Display ip configuration of host
+
+#Help in Powershell
+$ get-help [[-Name] <String[]>]         #Summon PowerShell help for a particular Cmdlet
+$ help                                  #Alias to help
+$ man                                   #Alias to help
+$ get-help -Detailed                    #Summon detailed help 
+$ get-help -Examples                    #Open help with examples
+$ get-help -ShowWindow                  #Open help in new window
+$ get-help -Online                      #Open help in web browser
+$ help ABOUT_*                          #Describes how to create/use/etc. a particular conceptual topic (e.g. hash tables, pipes)
+$ get-command				#Get list of commands
+$ get-verb				#Get list of verbs
+$ <Powershell Object> | get-member	#Get properties and methods of a Powershell object
+$ get-alias				#Get list of aliases (e.g. man -> help)
+
+#Working with files
+$ new-item -Name <filename> -Type <type>	#Create file of type, type in File, Directory, Sym-Link, etc.
+$ remove-item <filename>			#Remove a file
+
+#Equality
+-eq, -ieq, -ceq - equals
+-ne, -ine, -cne - not equals
+-gt, -igt, -cgt - greater than
+-ge, -ige, -cge - greater than or equal
+-lt, -ilt, -clt - less than
+-le, -ile, -cle - less than or equal
+
+# Matching
+-like, -ilike, -clike - string matches wildcard pattern
+-notlike, -inotlike, -cnotlike - string does not match wildcard pattern
+-match, -imatch, -cmatch - string matches regex pattern
+-notmatch, -inotmatch, -cnotmatch - string does not match regex pattern
+
+#Replacement
+-replace, -ireplace, -creplace - replaces strings matching a regex pattern
+
+# Containment
+-contains, -icontains, -ccontains - collection contains a value
+-notcontains, -inotcontains, -cnotcontains - collection does not contain a value
+-in - value is in a collection
+-notin - value is not in a collection
+
+# Type
+-is - both objects are the same type
+-isnot - the objects are not the same type
+
+#############
+# Pipelines #
+#############
+
+$ get-service -name bits | stop-service                 #Get the 'bits' service and pipe it to the stop-service command (same as $ stop-service -name bits)
+$ get-service | out-file -FilePath c:\test.txt          #Export content to plaintext file
+$ get-content c:\test.txt                               #Retrieve content from text file
+$ get-service | ConvertTo-csv                           #Pipe output converted to csv format
+$ get-service | export-csv -Path c:\service.csv         #Pipe output converted to csv format AND export to a file
+$ import-csv c:\service.csv                             #Import csv file
+$ get-service | ConvertTo-html -Property name,status | out-file c:\test.htm     #Pipe output converted to html format with specified fields and export to specified file
+$ get-process | Export-clixml -Path C:\good.xml         #Get list of running processes and export it to specified file
+$ compare-object -ReferenceObject (import-clixml c:\good.xml) -DifferenceObject (get-process) -Property name                #perform a comparison between the exported system state and the current running process and using their names as comparison criteria and print it to console. Note that the parentheses () establish order of operation
+
+# Show Properties/Members
+[PS]> Get-Process | Get-Member
+# Print particular member
+[PS]> (Get-Process).Name
+
+# PowerShell Pipelines
+[PS]> <command 1> | <command 2>
+[PS]> Get-Service | more
+
+# Sort by property names
+[PS]> Get-Process | Sort-Object -Property Name
+
+# Select all, or specific properties
+[PS]> Get-Process -Name lsass | Select-Object -Property *
+
+# Export to file
+[PS]> Get-Process | Sort-Object -Property Name | Export-Csv processes.csv
+
+# Pipeline a file 
+
+# Applying filters
+$ Get-ADUser -Filter * | Where-Object {$_.SamAccountName -like 'estrellita.laney'}
+
+###################################
+# Working with PowerShell objects #
+###################################
+
+$ get-process | where handles -gt 900                   #Get processes where property 'handles' is greater than 900
+$ get-process | where handles -gt 900 | sort handles    #As above AND sort by property 'handles'
+$ <Object> | gm                                         #Generate an object (e.g. from get-process) and return its members -> i.e. show its properties, methods, etc.. Alias of $ get-member
+$ get-service | <Select || Select-object> -Property name, status    #Generate objects and display their selected properties name and status
+$ get-childitem | select - Property name, length | sort -Property length -Descending        #Note get-childitem is *basically* dir/ls
+$ Get-EventLog -LogName System -Newest 5 | select -Property EventID, TimeWritten, Message | sort -Property TimeWritten | ConvertTo-html | out-file c:\error.htm
+#Get a process, select columns, sort by property, apply filter criteria
+$ get-process | select-object name,id,path | Sort-Object -Property id | Where-Object id -le "1000"
+
+$ get-cimclass						#Get list of common information models (classes of PowerShell objects)
+$ get-wmiobject						#Windows Management Instrumentation class, Windows implementation of CIM class. Similar to the above
+$ get-cimclass *BIOS*					#Get list of classes related to BIOS
+$ get-ciminstance win32_BIOS				#Get information on your BIOS
+
+#Working with processes
+$ start-process chrome					#Start chrome
+$ (get-process chrome).kill()				#Kill chrome
+
+#Working with user-defined functions
+#Declare a function
+$ function function-name { <functino> }
+$ function get-enumeration { get-date; get-process; get-service}
+#Call a function
+$ function-name
+$ get-enumeration
+
+#Modules - packages that extend PowerShell core functionality with application specific features and Cmdlets
+$ mmc                                   #Bring up module management console
+$ get-module                            #Show curently loaded modules
+$ get-module -ListAvailable             #List available modules, loaded or not
+
+#Convenience commands
+$ cat                                   #Display contents of file
+$ cls                                   #Clear screen like POSIX $ clear
+$ get-history                           #Display history of commands like $ history in POSIX
+$ [<Type>](<Object>)                    #Cast object to type XML
+    Ex. $x = [xml](cat .\myfile.xml)    #Take contents of file myfile.xml, cast it as type xml and assign it to variable 'x'
+$ notepad c:\service.csv                #Open specified file in notepad
+$ <Command> -whatif                     #Tells you what command would do without actually doing it
+$ <Command> -confirm                    #-whatif AND asks you to confirm you want to proceed
+$ $PSVersionTable                       #Get PowerShell version information
+
+#Common Parameters
+#Can be used with any command. Include common flags like -verbose, -debug, etc. safety commands like -whatif and -confirm
+$ <command> -ErrorAction silentlycontinue	#Don't throw out errors
+$ <command> -Verbose				#Tell me everything
+
+
